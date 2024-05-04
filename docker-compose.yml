@@ -1,8 +1,8 @@
 version: '3.5'
 
 services:
-  docker-symfony-web:
-    container_name: docker-symfony-web
+  tp-docker-symfony-web:
+    container_name: tp-docker-symfony-web
     build:
       context: ./docker/nginx
       args:
@@ -12,12 +12,12 @@ services:
     volumes:
       - ./public:/appdata/www/public
     depends_on:
-      - docker-symfony-be
+      - tp-docker-symfony-be
     networks:
-      - docker-symfony-network
+      - tp-docker-symfony-network
 
-  docker-symfony-be:
-    container_name: docker-symfony-be
+  tp-docker-symfony-be:
+    container_name: tp-docker-symfony-be
     build:
       context: docker/php
       args:
@@ -31,12 +31,12 @@ services:
     environment:
       XDEBUG_CLIENT_HOST: 172.17.0.1
       XDEBUG_CLIENT_PORT: 9003
-      PHP_IDE_CONFIG: serverName=docker-symfony
+      PHP_IDE_CONFIG: serverName=tp-docker-symfony
     networks:
-      - docker-symfony-network
+      - tp-docker-symfony-network
 
-  docker-symfony-db:
-    container_name: docker-symfony-db
+  tp-docker-symfony-db:
+    container_name: tp-docker-symfony-db
     build:
       context: ./docker/database
     ports:
@@ -45,9 +45,9 @@ services:
       MYSQL_DATABASE: database
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - docker-symfony-db-data:/var/lib/mysql
+      - tp-docker-symfony-db-data:/var/lib/mysql
     networks:
-      - docker-symfony-network
+      - tp-docker-symfony-network
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
 
 ###> doctrine/doctrine-bundle ###
@@ -74,8 +74,8 @@ volumes:
 ###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
-  docker-symfony-db-data:
+  tp-docker-symfony-db-data:
 
 networks:
-  docker-symfony-network:
+  tp-docker-symfony-network:
     external: true
