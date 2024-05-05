@@ -34,6 +34,8 @@ services:
       PHP_IDE_CONFIG: serverName=tp-docker-symfony
     networks:
       - tp-docker-symfony-network
+    depends_on:
+      - docker-symfony-db
 
   tp-docker-symfony-db:
     container_name: tp-docker-symfony-db
@@ -42,7 +44,7 @@ services:
     ports:
       - 10100:3306
     environment:
-      MYSQL_DATABASE: database
+      MYSQL_DATABASE: tp-symfony7
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - tp-docker-symfony-db-data:/var/lib/mysql
