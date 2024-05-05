@@ -35,7 +35,7 @@ services:
     networks:
       - tp-docker-symfony-network
     depends_on:
-      - docker-symfony-db
+      - tp-docker-symfony-db
 
   tp-docker-symfony-db:
     container_name: tp-docker-symfony-db
