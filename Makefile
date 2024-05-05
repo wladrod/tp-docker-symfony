@@ -14,7 +14,7 @@ start: ## Start the containers
 	docker network create tp-docker-symfony-network || true
 	cp -n docker-compose.yml.dist docker-compose.yml || true
 	cp -n .env.dist .env || true
-	U_ID=${UID} docker compose up
+	U_ID=${UID} docker compose up -d
 
 stop: ## Stop the containers
 	U_ID=${UID} docker-compose stop
